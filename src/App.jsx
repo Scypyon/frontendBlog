@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "./store/actions/postsAction";
 
@@ -8,6 +8,7 @@ function App({ fetchPosts, posts, isFetching }) {
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
+
   return (
     <>
       {isFetching ? (

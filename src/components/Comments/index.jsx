@@ -44,7 +44,10 @@ function Comments({ isFetching, allComments }) {
                 <div onClick={() => addRemoveComments("remove", i, i)}>X</div>
               </OneComment>
             ))}
-          <AddComment addRemoveComments={addRemoveComments} />
+          <AddComment
+            comments={comments}
+            addRemoveComments={addRemoveComments}
+          />
         </>
       )}
     </>
