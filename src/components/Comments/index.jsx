@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
@@ -16,21 +16,35 @@ const OneComment = styled.div`
 `;
 
 function Comments({ isFetching, allComments }) {
-  console.log("Komentarze: ", allComments);
+  const [comments, setComments] = useState();
+
+  useEffect(() => {
+    if (isFetching === false) setComments(allComments);
+  }, [allComments]);
+
+  const addRemoveComments = (value, email, body) => {
+    if (value === "add") {
+      setComments([...comments, { email, body }]);
+    } else {
+      const filteredComments = comments.filter((check, i) => i !== email);
+      setComments(filteredComments);
+    }
+  };
   return (
     <>
-      {isFetching ? (
+      {typeof comments === "undefined" ? (
         <p>Wczytuję komentarze...</p>
       ) : (
         <>
           {allComments &&
-            allComments.map((comment, i) => (
+            comments.map((comment, i) => (
               <OneComment key={i}>
                 <h4>{comment.email}</h4>
                 <p>{comment.body}</p>
+                <div onClick={() => addRemoveComments("remove", i, i)}>X</div>
               </OneComment>
             ))}
-          <AddComment />
+          <AddComment addRemoveComments={addRemoveComments} />
         </>
       )}
     </>

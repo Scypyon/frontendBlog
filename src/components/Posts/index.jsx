@@ -19,11 +19,15 @@ const Post = styled.div`
 
 function Posts({ post, fetchComments }) {
   const [displayComments, setDisplayComments] = useState("none");
+  const [fetch, setFetch] = useState("no");
 
   const CheckDisplayComments = (value, fetch) => {
     if (value === "none") setDisplayComments("block");
     else setDisplayComments("none");
-    fetchComments(post.id);
+    if (fetch === "no") {
+      fetchComments(post.id);
+      setFetch("yes");
+    }
   };
   return (
     <Post>
@@ -32,11 +36,9 @@ function Posts({ post, fetchComments }) {
       <button onClick={() => CheckDisplayComments(displayComments, fetch)}>
         Pokaż komentarze
       </button>
-      {displayComments !== "none" && (
-        <div>
+        <div style={{display:`${displayComments}`}}>
           <Comments idpost={post.id} />
         </div>
-      )}
     </Post>
   );
 }

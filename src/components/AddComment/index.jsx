@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 
-import { connect } from "react-redux";
-import { sumComments } from "../../store/actions/sumCommentsAction";
-
-function AddComment({ allComments, sumComments }) {
+export default function AddComment({ addRemoveComments }) {
   const [email, setEmail] = useState({});
   const [body, setBody] = useState({});
 
-  const addYourComment = () => {
-    sumComments(allComments, email, body);
-  };
   return (
     <>
       <input
@@ -24,23 +18,9 @@ function AddComment({ allComments, sumComments }) {
         onChange={e => setBody(e.target.value)}
       />
       <br />
-      <button onClick={addYourComment}>Dodaj Komentarz</button>
+      <button onClick={() => addRemoveComments("add", email, body)}>
+        Dodaj Komentarz
+      </button>
     </>
   );
 }
-
-const mapStateToProps = state => ({
-  allComments: state.comments.allComments,
-  error: state.comments.error,
-  isFetching: state.comments.isFetching
-});
-
-const mapDispatchToProps = dispatch => ({
-  sumComments: (allComments, email, body) =>
-    dispatch(sumComments(allComments, email, body))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddComment);

@@ -4,8 +4,6 @@ import {
   FETCHING_SUCCEED
 } from "../actions/commentsAction";
 
-import { SUM_ALL_COMMENTS } from "../actions/sumCommentsAction";
-
 const initState = {
   allComments: {},
   error: "",
@@ -28,14 +26,6 @@ export const commentsReducer = (state = initState, action) => {
       };
     case FETCHING_FAILED:
       return { ...state, error: "Coś poszło nie tak", isFetching: false };
-    case SUM_ALL_COMMENTS:
-      return {
-        ...state,
-        allComments: {
-          ...state.allComments,
-          [action.idpost]: action.data
-        }
-      };
     default: {
       return state;
     }
