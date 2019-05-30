@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
@@ -23,12 +23,13 @@ function Comments({ isFetching, allComments }) {
         <p>Wczytuję komentarze...</p>
       ) : (
         <>
-          {allComments.map((comment, i) => (
-            <OneComment key={i}>
-              <h4>{comment.email}</h4>
-              <p>{comment.body}</p>
-            </OneComment>
-          ))}
+          {allComments &&
+            allComments.map((comment, i) => (
+              <OneComment key={i}>
+                <h4>{comment.email}</h4>
+                <p>{comment.body}</p>
+              </OneComment>
+            ))}
           <AddComment />
         </>
       )}
@@ -36,9 +37,9 @@ function Comments({ isFetching, allComments }) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   error: state.comments.error,
   isFetching: state.comments.isFetching,
-  allComments: state.comments.allComments
+  allComments: state.comments.allComments[ownProps.idpost]
 });
 export default connect(mapStateToProps)(memo(Comments));

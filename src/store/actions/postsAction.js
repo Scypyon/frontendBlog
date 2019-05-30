@@ -11,7 +11,9 @@ const fetchingFailed = error => ({ type: FETCHING_FAILED, error });
 export const fetchPosts = async dispatch => {
   try {
     dispatch(isFetching);
-    const { data } = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
     dispatch(fetchingSucceed(data));
   } catch (error) {
     dispatch(fetchingFailed(error));

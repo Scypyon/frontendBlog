@@ -1,4 +1,8 @@
-import { IS_FETCHING, FETCHING_FAILED, FETCHING_SUCCEED } from "../actions/postsAction";
+import {
+  IS_FETCHING,
+  FETCHING_FAILED,
+  FETCHING_SUCCEED
+} from "../actions/postsAction";
 
 const initState = { posts: [], error: "", isFetching: false };
 

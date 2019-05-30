@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { sumComments } from "../../store/actions/sumCommentsAction";
 
-function AddComment({ comments, sumComments }) {
+function AddComment({ allComments, sumComments }) {
   const [email, setEmail] = useState({});
   const [body, setBody] = useState({});
 
   const addYourComment = () => {
-    sumComments(comments, email,body);
+    sumComments(allComments, email, body);
   };
   return (
     <>
@@ -30,13 +30,14 @@ function AddComment({ comments, sumComments }) {
 }
 
 const mapStateToProps = state => ({
-  comments: state.comments.comments,
+  allComments: state.comments.allComments,
   error: state.comments.error,
   isFetching: state.comments.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
-  sumComments: (comments,email,body) => dispatch(sumComments(comments,email,body))
+  sumComments: (allComments, email, body) =>
+    dispatch(sumComments(allComments, email, body))
 });
 
 export default connect(

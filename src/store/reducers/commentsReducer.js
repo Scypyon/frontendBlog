@@ -7,7 +7,7 @@ import {
 import { SUM_ALL_COMMENTS } from "../actions/sumCommentsAction";
 
 const initState = {
-  allComments: [],
+  allComments: {},
   error: "",
   isFetching: false
 };
@@ -31,7 +31,10 @@ export const commentsReducer = (state = initState, action) => {
     case SUM_ALL_COMMENTS:
       return {
         ...state,
-        comments: action.data
+        allComments: {
+          ...state.allComments,
+          [action.idpost]: action.data
+        }
       };
     default: {
       return state;

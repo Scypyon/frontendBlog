@@ -1,8 +1,7 @@
 export const SUM_ALL_COMMENTS = "addcomment:SUM_ALL_COMMENTS";
 
-const sumAllComments = data => ({ type: SUM_ALL_COMMENTS, data });
+const sumAllComments = (data,email,body) => ({ type: SUM_ALL_COMMENTS, data,email,body });
 
-export const sumComments = (comments, email,body) => async dispatch => {
-  comments.push({email,body});
-  dispatch(sumAllComments(comments));
+export const sumComments = (allComments, email, body) => async dispatch => {
+  dispatch(sumAllComments(allComments, email, body));
 };

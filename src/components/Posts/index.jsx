@@ -19,15 +19,11 @@ const Post = styled.div`
 
 function Posts({ post, fetchComments }) {
   const [displayComments, setDisplayComments] = useState("none");
-  const [fetch, setFetch] = useState("no");
 
   const CheckDisplayComments = (value, fetch) => {
     if (value === "none") setDisplayComments("block");
     else setDisplayComments("none");
-    if (fetch === "notyet") {
-      fetchComments(post.id);
-      setFetch("yes");
-    }
+    fetchComments(post.id);
   };
   return (
     <Post>
@@ -38,7 +34,7 @@ function Posts({ post, fetchComments }) {
       </button>
       {displayComments !== "none" && (
         <div>
-          <Comments />
+          <Comments idpost={post.id} />
         </div>
       )}
     </Post>
